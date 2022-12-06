@@ -9,6 +9,7 @@ import { PokemonService } from '../services/pokemon.service';
 export class PokemonComponent implements OnInit {
 
   name : string;
+  urlImage : string;
 
   constructor(private pokemonService : PokemonService) { }
 
@@ -16,7 +17,10 @@ export class PokemonComponent implements OnInit {
   }
 
   search(){
-    this.pokemonService.getPokemon(this.name).subscribe(data =>{console.log(data)});
+    //Es importante el Observable para poder suscribirse al return
+    this.pokemonService.getPokemon(this.name).subscribe((data:any) =>{
+      this.urlImage = data.sprites.front_default
+    });
   }
 
 }
